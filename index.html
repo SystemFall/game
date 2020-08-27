@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Game</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h2>Simon The Game</h2>
+      <div class="game">
+        <div class="grid" :class="click_blocking">
+          <button
+            class="button"
+            @click="buttonClick(but.index)"
+            v-for="but in buttons"
+            v-bind:key="but.index"
+            ref="btn"
+            :class="but.condition"
+          ></button>
+        </div>
+        <div class="control" :class="disable_control">
+          <h3>Раунд: {{round}}</h3>
+          <button @click="start()">Старт</button>
+          <h3>Сложность</h3>
+          <p v-for="d in diff">
+            <input
+              v-bind:value="d.factor"
+              checked
+              name="difficulty"
+              type="radio"
+              v-model="difficulty"
+            />{{d.name}}
+          </p>
+        </div>
+        <div class="notice" v-show="notice_visible">{{notice()}}</div>
+      </div>
+    </div>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>
